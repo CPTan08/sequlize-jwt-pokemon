@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
   Trainer.init(
     {
       username: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false, // here
         unique: true,
       },
       password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false, // here
       },
     },

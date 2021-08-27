@@ -5,9 +5,14 @@ const pokemonRouter = require("./router/pokemon.router.js");
 app.use(express.json());
 
 db.sequelize.sync();
-app.use("/pokemon", pokemonRouter);
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+
+app.use("/pokemon", pokemonRouter);
+//default
+
+const trainersRoutes = require("./router/trainers.js");
+app.use("/trainers", trainersRoutes);
 
 module.exports = app;
