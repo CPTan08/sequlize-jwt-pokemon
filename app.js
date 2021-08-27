@@ -7,10 +7,7 @@ app.use(express.json());
 db.sequelize.sync();
 app.use("/pokemon", pokemonRouter);
 
-// // default error handler
-// app.use((err, req, res, next) => {
-//   err.statusCode = err.statusCode || 500;
-//   res.status(err.statusCode).send(err.message);
-// });
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 module.exports = app;

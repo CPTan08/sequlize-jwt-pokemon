@@ -28,19 +28,17 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// route to search
+// route for search http://localhost:3000/pokemon/search?id=2&name=poke
 router.get("/search", async (req, res, next) => {
+  const pokemonId = req.query.id;
+  const name = req.query.name;
+  console.log(`this is pokemon ${pokemonId} - ${name}`);
   try {
-    const Id = req.query.id;
-    const name = req.query.name;
-
-    console.log(`this is pokemon id ${pokemonid} - ${name}`);
-    const pokemonId = req.params.id;
-    const pokemon = await db.Pokemon.findByPk(Id);
-    if (pokemon === null) {
-      res.sendStatus(404);
+    const pokemons = await db.Pokemon.findByPk(pokemonId);
+    if (pokemons === null) {
+      res.sendStatus(404); // return 404 if pokemon is null;
     } else {
-      res.json(pokemon);
+      res.status(200).json(pokemons);
     }
   } catch (error) {
     next(error);
@@ -92,6 +90,21 @@ router.post("/:id", async (req, res, next) => {
       }
     );
     res.json({ message: `Updated ${numofUpdatedRecord} successfully!` });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// route to update pokemons using the put
+router.put("/:id", async (req, res, next) => {
+  try {
+    const pokemonId = req.params.id;
+    const pokemonToUpdate = await db.Pokemon.findByPk(pokemonId);
+
+    if (pokemonToUpdate === null) return res.sendStatus(404);
+    await pokemonToUpdate.update(req.body);
+
+    res.json(pokemonToUpdate);
   } catch (error) {
     next(error);
   }
