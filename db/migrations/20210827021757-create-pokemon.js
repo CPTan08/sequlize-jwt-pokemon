@@ -14,13 +14,13 @@ module.exports = {
         unique: true,
       },
       japaneseName: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       baseHP: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
       },
       category: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
