@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use("/pokemon", pokemonRouter);
 //default
 
-const trainersRoutes = require("./router/trainers.js");
+const trainersRoutes = require("./router/trainers.router.js");
 app.use("/trainers", trainersRoutes);
 
 module.exports = app;
