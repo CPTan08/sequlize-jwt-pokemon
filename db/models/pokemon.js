@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Pokemon.belongsTo(models.Trainer, {
+        foreignKey: "trainerId",
+        allowNull: true,
+      });
     }
   }
   Pokemon.init(
@@ -26,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       category: {
         type: DataTypes.STRING,
+      },
+      trainerId: {
+        type: DataTypes.INTEGER,
       },
     },
     {
