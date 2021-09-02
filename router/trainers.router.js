@@ -60,6 +60,41 @@ router.post("/login", async (req, res, next) => {
       },
     });
 
+    // router.get("/:id/pokemons", auth, async (req, res, next) => {
+    //   try {
+    //     //const trainerId = await db.Trainer.findAll();
+    //     const trainerId = req.params.id;
+    //     const pokemons = await db.Pokemon.findAll({
+    //       where: trainerId,
+    //     });
+    //     res.json(pokemons);
+    //   } catch (err) {
+    //     console.error(err);
+    //     next(err);
+    //   }
+    // });
+
+    router.get("/pokemons", auth, async (req, res, next) => {
+      try {
+        //const trainerId = await db.Trainer.findAll();
+        const trainer = await db.Trainer.findOne({
+          where: {
+            username: req.user.username,
+          },
+          raw: true,
+        });
+        const pokemons = await db.Trainer.findOne({
+          where: { id: trainer.id },
+          include: { model: db.Pokemon },
+        });
+
+        res.status(200).json(pokemons);
+      } catch (err) {
+        console.error(err);
+        next(err);
+      }
+    });
+
     // return if Trainer does not exist
     // message returned is intentionally vague for security reasons
     if (!trainer) {

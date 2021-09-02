@@ -21,7 +21,7 @@ const createJWTToken = (username) => {
 
   // Method 2
   const payload = { username };
-  const token = jwt.sign(payload, secret, { expiresIn: "1m" }); // 1min
+  const token = jwt.sign(payload, secret, { expiresIn: "7d" }); // 1min
 
   return token;
 };
