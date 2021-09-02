@@ -83,12 +83,12 @@ router.post("/login", async (req, res, next) => {
           },
           raw: true,
         });
-        const pokemons = await db.Trainer.findOne({
+        const trainerWithPokemons = await db.Trainer.findOne({
           where: { id: trainer.id },
           include: { model: db.Pokemon },
         });
 
-        res.status(200).json(pokemons);
+        res.status(200).json(trainerWithPokemons.Pokemons);
       } catch (err) {
         console.error(err);
         next(err);
